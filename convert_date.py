@@ -9,6 +9,8 @@ def date_monday():
     day_number = datetime.datetime.today().weekday()
     mon_date = int(now.day) - day_number
 
+    """ since the above subtracts from day_number 0-6, any date
+        less than or equal to 6 could break things """
     if now.day <= 6:
         day_diff = (int(now.day) + day_number) - day_number
         return '%d/%s/%d' % (now.month, day_diff, now.year)
@@ -20,5 +22,3 @@ def epoch_date(n):
         date_monday for strava.py is converted in this case """
     unix_epoch = time.mktime(datetime.datetime.strptime(n, '%m/%d/%Y').timetuple())
     return '%.0f' % unix_epoch
-
-print date_monday()
