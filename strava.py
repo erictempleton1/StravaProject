@@ -84,3 +84,4 @@ print 60 / (((avg_speed[0] * 0.000621371) * 60) * 60)
 # figure out remainder portion of above. remainder should be multiplied by 60 somehow?!
 
 # testing again
+# testing testing
