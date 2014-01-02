@@ -76,9 +76,10 @@ def display_results():
  
  
 #display_results()
+
+
 # avg page using minutes per miles?
 print moving_time[0] / distance[0]
 print 60 / (((avg_speed[0] * 0.000621371) * 60) * 60)
-# display_results()
 
 # figure out remainder portion of above. remainder should be multiplied by 60 somehow?!
