@@ -1,25 +1,10 @@
 import requests     
 import json  
-import datetime 
-import time   
-   
-   
-def date_monday(): 
-    """ returns day of the week from 0-6, then subtracted from 
-        current date to return monday's date for given week for any given week """
-    now = datetime.datetime.now() 
-    day_number = datetime.datetime.today().weekday() 
-    mon_date = int(now.day) - day_number 
-    return '%d/%s/%d' % (now.month, mon_date, now.year) 
-   
-def epoch_date(n): 
-    """ converts any given date in m/d/y format to unix epoch. 
-        date_monday is converted in this case """
-    unix_epoch = time.mktime(datetime.datetime.strptime(n, '%m/%d/%Y').timetuple()) 
-    return '%.0f' % unix_epoch 
-   
-   
-date_param = epoch_date(date_monday()) 
+import convert_date
+import datetime
+
+
+date_param = convert_date.epoch_date(convert_date.date_monday())
    
 payload = {'access_token': 'b295cfca0cfdf8f23d3a94707337f56b77ce7354', 'after': date_param}            
 r = requests.get('https://www.strava.com/api/v3/athlete/activities', params=payload)             
@@ -60,6 +45,9 @@ def days_remaining():
  
 def avg_to_goal():
     return miles_remaining(50) / days_remaining()
+
+def avg_pace():
+    return sum(moving_time) / sum(distance)
      
 def display_results():  
           
@@ -69,17 +57,11 @@ def display_results():
     print '%.1f miles' % week_total_miles()
     print '%.1f mins total' % week_total_time()   
     print '%.0f runs' % len(moving_time)
-    print '%.1f average miles per day' % avg_miles() 
+    print '%.1f avg miles per day' % avg_miles() 
     print '%.1f miles remaing' % miles_remaining(50)
     print '%.0f days remaining this week after today' % days_remaining()
     print '%.1f miles per day to reach weekly goal' % avg_to_goal()
+    print '%.2f mins/mile avg pace' % avg_pace()
  
  
-#display_results()
-
-
-# avg page using minutes per miles?
-print moving_time[0] / distance[0]
-print 60 / (((avg_speed[0] * 0.000621371) * 60) * 60)
-
-# figure out remainder portion of above. remainder should be multiplied by 60 somehow?!
+display_results()
