@@ -5,9 +5,9 @@ import time
 def date_monday():
     """ returns day of the week from 0-6, then subtracted from
         current date to return monday's date for given week for any given week.
-        switched to timedelta for when a new month starts midweek and causes problems
-        with prior months 31,30,29 ect. also added failsafe for first week
-        of a new year, which caused issues with 2013 to 2014 in same week."""
+        switched to timedelta for when a new month starts the date rolls to 31,30, 29
+        instead of negative numbers for first week.
+        similar issue fixed with 2013 to 2014 in same week."""
 
     now = datetime.datetime.now()
     day_number = datetime.datetime.today().weekday()
