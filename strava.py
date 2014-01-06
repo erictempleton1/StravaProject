@@ -35,8 +35,11 @@ class Calculations(object):
     def week_total_miles(self):   
         return sum(self.distance)   
         
-    def avg_miles(self):   
-        return sum(self.distance) / len(self.distance)   
+    def avg_miles(self):
+        if len(self.distance) > 0:   
+            return sum(self.distance) / len(self.distance)
+        else:
+            return 0 
         
     def miles_remaining(self, n):  
         """ change n (goal) as needed """   
@@ -61,22 +64,10 @@ class Calculations(object):
             return self.miles_remaining(50) / self.days_remaining()
 
     def avg_pace(self):
-        return sum(self.moving_time) / sum(self.distance)
-
-def display_results():  
-          
-    date = datetime.datetime.now()  
-      
-    print 'Weekly Totals as of %s:' % date.strftime('%m/%d/%Y')
-    print '%.1f miles' % week_total_miles()
-    print '%.1f miles remaining to goal' % miles_remaining(50)
-    print '%.1f mins total' % week_total_time()   
-    print '%.0f runs' % len(moving_time)
-    print '%.1f avg miles per day' % avg_miles() 
-    print '%.0f days remaining this week after today' % days_remaining()
-    print '%.1f miles per day to reach weekly goal' % avg_to_goal()
-    print '%.2f mins/mile avg pace' % avg_pace()
-
+        if len(self.distance) > 0:
+            return sum(self.moving_time) / sum(self.distance)
+        else:
+            return 0
 
 
 
