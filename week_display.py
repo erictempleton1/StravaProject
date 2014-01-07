@@ -1,7 +1,7 @@
-import strava
+from strava import Calcs
 import datetime
 
-calcs = strava.Calculations()
+calcs = Calcs()
 
 def display_results():  
           
