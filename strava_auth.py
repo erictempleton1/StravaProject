@@ -15,15 +15,4 @@ class Auth(object):
                           params=payload)           
         self.results = r.json()
         return self.results
-
-class PrintJson(object):
-
-    def __init__(self):
-        self.auth = Auth().connect()
-        self.results = Auth.results
-        self.data = json.dumps(self.results, indent=4, sort_keys=True)
-    
-    def json_text(self):
-        with open('strava_json.txt', 'w') as f:
-            f.write(self.data)
       
