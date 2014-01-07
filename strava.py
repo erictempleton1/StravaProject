@@ -1,33 +1,28 @@
-import requests     
-import json  
 import convert_date
 import datetime
-
-date_param = convert_date.epoch_date(convert_date.date_monday())
-   
-payload = {'access_token': 'b295cfca0cfdf8f23d3a94707337f56b77ce7354', 'after': date_param}            
-r = requests.get('https://www.strava.com/api/v3/athlete/activities', params=payload)             
-results = r.json()     
+import json
+from strava_auth import Auth
           
 # for readability in text file      
-data = json.dumps(results, indent=4, sort_keys=True)  
+# data = json.dumps(results, indent=4, sort_keys=True)  
 
 # uncomment to write json response to file if needed     
 #with open('strava.txt', 'w')as f:  
    #f.write(data)  
-    
 
-class Calculations(object):
+
+class Calcs(object):
 
     def __init__(self):
-        self.athlete_id = [ath_id['athlete']['id'] for ath_id in results]           
-        self.moving_time = [time['moving_time'] / 60 for time in results] # secs to mins   
-        self.distance = [items['distance'] * 0.000621371 for items in results] # meters to miles   
-        self.date = [date['start_date'] for date in results]    
-        self.map_polyline = [maps['map']['summary_polyline'] for maps in results]    
-        self.calories = [cals['calories'] for cals in results]   
-        self.activity_id = [act_id['id'] for act_id in results]
-        self.avg_speed = [spd['average_speed'] for spd in results] 
+        self.auth = Auth().connect()
+        self.athlete_id = [ath_id['athlete']['id'] for ath_id in self.auth]           
+        self.moving_time = [time['moving_time'] / 60 for time in self.auth] # secs to mins   
+        self.distance = [items['distance'] * 0.000621371 for items in self.auth] # meters to miles   
+        self.date = [date['start_date'] for date in self.auth]    
+        self.map_polyline = [maps['map']['summary_polyline'] for maps in self.auth]    
+        self.calories = [cals['calories'] for cals in self.auth]   
+        self.activity_id = [act_id['id'] for act_id in self.auth]
+        self.avg_speed = [spd['average_speed'] for spd in self.auth] 
 
     def time_list(self):
         return self.moving_time
