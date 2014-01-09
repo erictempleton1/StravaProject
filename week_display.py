@@ -18,3 +18,6 @@ def display_results():
     print '%.2f mins/mile avg pace' % calcs.avg_pace()
 
 display_results()
+
+# possibly add print option for line 14. Ex 4 runs in 2 days, 5 runs in 7 days ect
+# one possible solution for this is to use date from strava api. need to think on this.
