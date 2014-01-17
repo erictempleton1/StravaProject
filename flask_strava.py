@@ -1,13 +1,3 @@
-import sys, os
-INTERP = os.path.join(os.environ['HOME'], 'django.runthescript.com/StravaProject', 'bin', 'python')
-if sys.executable != INTERP:
-    os.execl(INTERP, INTERP, *sys.argv)
-sys.path.append(os.getcwd())
- 
-sys.path.append('django')
-from django.StravaProject import StravaProject as application
-
-
 import datetime
 from strava import Calcs
 from flask import Flask, render_template
