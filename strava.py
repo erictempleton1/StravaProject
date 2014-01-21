@@ -69,7 +69,7 @@ class Calcs(object):
         if len(self.distance) == 1:
             return '%.0f run' % len(self.distance)
         else:
-            return len(self.distance)
+            return '%.0f runs' % len(self.distance)
 
 
 
