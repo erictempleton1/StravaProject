@@ -1,0 +1,1 @@
+web: gunicorn flask_strava:app_strava
