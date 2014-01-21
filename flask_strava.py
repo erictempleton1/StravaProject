@@ -1,6 +1,6 @@
 import datetime
 from strava import Calcs
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 app_strava = Flask(__name__)
 
 
@@ -24,6 +24,15 @@ def index_strava():
                             miles_remain=miles_remain, avg_pace=avg_pace, week_total_time=week_total_time,
                             num_runs=num_runs, avg_miles=avg_miles, days_remain=days_remain,
                             avg_to_goal=avg_to_goal,)
+
+@app_strava.route('/test')
+def form():
+    return render_template('forms.html')
+
+@app_strava.route('/response', methods=['POST'])
+def hello():
+    name=request.form['yourname']
+    return render_template('form_action.html', name=name)
 
 if __name__ == '__main__':
     app_strava.run(debug=True)
