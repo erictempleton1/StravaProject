@@ -64,6 +64,13 @@ class Calcs(object):
         else:
             return 0
 
+    def num_runs(self):
+        """ changes wording from 'runs' to 'run' if only one run """
+        if len(self.distance) == 1:
+            return '%.0f run' % len(self.distance)
+        else:
+            return len(self.distance)
+
 
 
 

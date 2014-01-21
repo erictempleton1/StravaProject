@@ -14,7 +14,7 @@ def index_strava():
     week_miles = '%.1f miles' % calcs.week_total_miles()
     miles_remain = '%.1f miles remaining to goal' % calcs.miles_remaining(50)
     week_total_time = '%.1f mins total' % calcs.week_total_time()   
-    moving_time = '%.0f runs' % len(calcs.moving_time)
+    num_runs = calcs.num_runs()
     avg_miles = '%.1f avg miles per day' % calcs.avg_miles() 
     days_remain = '%.0f days remaining this week after today' % calcs.days_remaining()
     avg_to_goal = '%.1f miles per day to reach weekly goal' % calcs.avg_to_goal()
@@ -22,7 +22,7 @@ def index_strava():
 
     return render_template('strava.html', week_date=week_date, week_miles=week_miles, 
                             miles_remain=miles_remain, avg_pace=avg_pace, week_total_time=week_total_time,
-                            moving_time=moving_time, avg_miles=avg_miles, days_remain=days_remain,
+                            num_runs=num_runs, avg_miles=avg_miles, days_remain=days_remain,
                             avg_to_goal=avg_to_goal,)
 
 if __name__ == '__main__':
