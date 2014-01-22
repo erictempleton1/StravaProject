@@ -12,4 +12,3 @@ for dates in date:
 
 for miles in distance:
     print '%.02f' % miles
-    
