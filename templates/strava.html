@@ -5,22 +5,10 @@
     <h3>
     {{ week_date }}
     </h3>
-		<div class="body_text">
-				{{ week_miles }}
-			<br>
-				{{ miles_remain }}
-			<br>
-				{{ week_total_time }}
-			<br>
-				{{ num_runs }}
-			<br>
-				{{ avg_miles }}
-			<br>
-				{{ days_remain }}
-			<br>
-				{{ avg_to_goal }}
-			<br>
-				{{ avg_pace }}
-		</div>
+		<ul>
+    		{% for items in results_list %}
+        		<li>{{ items }}</li>
+    		{% endfor %}
+    	</ul>
 </body>
 </html>
