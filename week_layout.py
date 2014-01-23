@@ -12,7 +12,22 @@ date_distance = zip(date, distance)
 for dates, miles in date_distance:
     print datetime.datetime.strptime(dates, '%Y-%m-%d').strftime('%A'), '%.02f' % miles
 
-day_number = datetime.datetime.today().weekday()
-print day_number
+for dates in date:
+    print datetime.datetime.strptime(dates, '%Y-%m-%d').weekday()
 
-# figure out how to use this with range to slice in dates for the rest of the week
+day_dict = {0:'Monday', 1:'Tuesday', 2:'Wednesday',
+            3:'Thursday', 4:'Friday', 5:'Saturday',
+            6:'Sunday'}
+
+
+"""
+ # try to use something like this to compare dict and list
+
+for key in mylist:
+    if key in mydict1:
+        print 'Key %s in dict 1' % key
+    elif key in mydict2:
+        print 'Key %s in dict 2' % key
+    else:
+        print 'Key %s not in dictionaries' % key
+"""
