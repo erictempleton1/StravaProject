@@ -19,7 +19,7 @@ def index_strava():
     days_remain = '%.0f days remaining this week after today' % calcs.days_remaining()
     avg_to_goal = '%.1f miles per day to reach weekly goal' % calcs.avg_to_goal()
     avg_pace = '%.2f mins/mile avg pace' % calcs.avg_pace()
-    week_goal = 'Week goal: %.0f' % calcs.week_goal(45)
+    week_goal = 'Week goal: %.0f miles' % calcs.week_goal(45)
     
     results_list = [week_goal, week_miles, miles_remain, week_total_time,
                     num_runs, avg_miles, days_remain, avg_to_goal, avg_pace,]
