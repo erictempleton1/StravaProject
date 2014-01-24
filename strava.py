@@ -71,6 +71,9 @@ class Calcs(object):
         else:
             return '%.0f runs' % len(self.distance)
 
+    def week_goal(self, n):
+        return n
+
 
 
 
