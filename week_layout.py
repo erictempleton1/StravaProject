@@ -17,8 +17,9 @@ date_num = [datetime.datetime.strptime(dates, '%Y-%m-%d').weekday() for dates in
 day_list = ['Monday', 'Tuesday', 'Wednesday', 'Thursday',
             'Friday', 'Saturday', 'Sunday']
 
-for names in day_list:
-    if date_names in day_list:
-        print date_names[names], distance[names]
-    else:
+
+date1 = int(datetime.datetime.now().strftime('%d')) + 1
+date2 = int(datetime.datetime.strptime(date[-1], '%Y-%m-%d').strftime('%d'))
+
+print date1 != date2
     

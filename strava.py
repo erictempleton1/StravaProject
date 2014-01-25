@@ -18,7 +18,7 @@ class Calcs(object):
         self.athlete_id = [ath_id['athlete']['id'] for ath_id in self.auth]           
         self.moving_time = [time['moving_time'] / 60 for time in self.auth] # secs to mins   
         self.distance = [items['distance'] * 0.000621371 for items in self.auth] # meters to miles   
-        self.date = [date['start_date'] for date in self.auth]    
+        self.date = [date['start_date'][:10] for date in self.auth]    
         self.map_polyline = [maps['map']['summary_polyline'] for maps in self.auth]    
         self.calories = [cals['calories'] for cals in self.auth]   
         self.activity_id = [act_id['id'] for act_id in self.auth]
@@ -48,9 +48,16 @@ class Calcs(object):
  
     def days_remaining(self):
         """ added if's to deal with 0's produced by dividing by 0 on sundays """
+        day_num = int(datetime.datetime.now().strftime('%d'))
+
+        # returns last date from api formatted as day of month
+        last_run = int(datetime.datetime.strptime(self.date[-1], '%Y-%m-%d').strftime('%d'))
         day_today = datetime.datetime.today().weekday() + 1
         if day_today == 7:
             return 0
+        elif day_num > last_run:
+            # accounts for extra day if you check stats but haven't run that day
+            return 8 - day_today
         else:
             return 7 - day_today
  
