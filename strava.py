@@ -24,6 +24,9 @@ class Calcs(object):
         self.activity_id = [act_id['id'] for act_id in self.auth]
         self.avg_speed = [spd['average_speed'] for spd in self.auth] 
 
+    def week_goal(self, n):
+        return n
+
     def time_list(self):
         return self.moving_time
 
@@ -56,7 +59,7 @@ class Calcs(object):
         if self.days_remaining() == 0:
             return 0
         else:
-            return self.miles_remaining(50) / self.days_remaining()
+            return self.miles_remaining(self.week_goal(45)) / self.days_remaining()
 
     def avg_pace(self):
         if len(self.distance) > 0:
@@ -70,9 +73,6 @@ class Calcs(object):
             return '%.0f run' % len(self.distance)
         else:
             return '%.0f runs' % len(self.distance)
-
-    def week_goal(self, n):
-        return n
 
 
 
