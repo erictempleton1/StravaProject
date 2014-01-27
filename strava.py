@@ -40,8 +40,12 @@ class Calcs(object):
             return 0 
         
     def miles_remaining(self, n):  
-        """ change n (goal) as needed """   
-        return n - self.week_total_miles()   
+        """ change n (goal) as needed """
+        miles_remaining = n - self.week_total_miles()
+        if miles_remaining >= 0:
+            return '%.1f miles remaining' % miles_remaining
+        else:
+            return '0 miles remaining (%.1f over)' % abs(miles_remaining)
         
     def week_total_time(self):   
         return sum(self.moving_time)
