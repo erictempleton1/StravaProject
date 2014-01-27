@@ -57,8 +57,10 @@ class Calcs(object):
         # returns last date from api formatted as day of month
         last_run = int(datetime.datetime.strptime(self.date[-1], '%Y-%m-%d').strftime('%d'))
         day_today = datetime.datetime.today().weekday() + 1
-        if day_today == 7 and day_num > last_run:
+        if day_today == 7:
             return 0
+        elif day_today == 1:
+            return 7
         elif day_num > last_run:
             # accounts for extra day if you check stats but haven't run that day
             return 8 - day_today
@@ -105,7 +107,7 @@ class Calcs(object):
         return layout_list
 
     def progress_percent(self):
-    """ gets percent complete for status bar. accounts for > 100% """
+        """ gets percent complete for status bar. accounts for > 100% """
         if (self.week_total_miles() / self.week_goal(45)) * 100 <= 100:
             return (self.week_total_miles()/self.week_goal(45)) * 100
         else:
