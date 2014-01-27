@@ -42,28 +42,25 @@ class Calcs(object):
     def miles_remaining(self, n):  
         """ change n (goal) as needed """
         miles_remaining = n - self.week_total_miles()
-        if miles_remaining >= 0:
-            return '%.1f miles remaining' % miles_remaining
-        else:
-            return '0 miles remaining (%.1f over)' % abs(miles_remaining)
+        return int(miles_remaining)
         
     def week_total_time(self):   
         return sum(self.moving_time)
- 
+
+    def return_last_date(self):
+        try:
+            last_run = int(datetime.datetime.strptime(self.date[-1], '%Y-%m-%d').strftime('%d'))
+        except IndexError:
+            pass
+            
     def days_remaining(self):
         """ added if's to deal with 0's produced by dividing by 0 on sundays """
         day_num = int(datetime.datetime.now().strftime('%d'))
-
-        # returns last date from api formatted as day of month
-        day_today = datetime.datetime.today().weekday() + 1
-        last_run = int(datetime.datetime.strptime(self.date[-1], '%Y-%m-%d').strftime('%d'))
-        if day_today == 7 and day_num > last_run:
+        day_today = int(datetime.datetime.today().weekday() + 1)
+        if day_today == 7:
             return 0
         elif day_today == 1:
             return 7
-        elif day_num > last_run:
-            # accounts for extra day if you check stats but haven't run that day
-            return 8 - day_today
         else:
             return 7 - day_today
  
@@ -72,7 +69,7 @@ class Calcs(object):
         if self.days_remaining() == 0:
             return 0
         else:
-            return self.miles_remaining(self.week_goal(45)) / self.days_remaining()
+            return self.miles_remaining(self.week_goal(55)) / self.days_remaining()
 
     def avg_pace(self):
         if len(self.distance) > 0:
@@ -108,8 +105,8 @@ class Calcs(object):
 
     def progress_percent(self):
         """ gets percent complete for status bar. accounts for > 100% """
-        if (self.week_total_miles() / self.week_goal(45)) * 100 <= 100:
-            return (self.week_total_miles()/self.week_goal(45)) * 100
+        if (self.week_total_miles() / self.week_goal(55)) * 100 <= 100:
+            return (self.week_total_miles()/self.week_goal(55)) * 100
         else:
             return 100
         
