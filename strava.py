@@ -57,7 +57,7 @@ class Calcs(object):
         # returns last date from api formatted as day of month
         last_run = int(datetime.datetime.strptime(self.date[-1], '%Y-%m-%d').strftime('%d'))
         day_today = datetime.datetime.today().weekday() + 1
-        if day_today == 7:
+        if day_today == 7 and day_num > last_run:
             return 0
         elif day_num > last_run:
             # accounts for extra day if you check stats but haven't run that day
