@@ -22,7 +22,7 @@ class Calcs(object):
         self.map_polyline = [maps['map']['summary_polyline'] for maps in self.auth]    
         self.calories = [cals['calories'] for cals in self.auth]   
         self.activity_id = [act_id['id'] for act_id in self.auth]
-        self.avg_speed = [spd['average_speed'] for spd in self.auth] 
+        self.avg_speed = [spd['average_speed'] for spd in self.auth]
 
     def week_goal(self, n):
         return n
@@ -55,9 +55,9 @@ class Calcs(object):
         day_num = int(datetime.datetime.now().strftime('%d'))
 
         # returns last date from api formatted as day of month
-        last_run = int(datetime.datetime.strptime(self.date[-1], '%Y-%m-%d').strftime('%d'))
         day_today = datetime.datetime.today().weekday() + 1
-        if day_today == 7:
+        last_run = int(datetime.datetime.strptime(self.date[-1], '%Y-%m-%d').strftime('%d'))
+        if day_today == 7 and day_num > last_run:
             return 0
         elif day_today == 1:
             return 7
