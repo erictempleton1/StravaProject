@@ -48,19 +48,18 @@ class Calcs(object):
         return sum(self.moving_time)
 
     def return_last_date(self):
+        """ handles error when there is no runs for a week yet """
         try:
             last_run = int(datetime.datetime.strptime(self.date[-1], '%Y-%m-%d').strftime('%d'))
         except IndexError:
-            pass
+            last_run = 7
             
     def days_remaining(self):
         """ added if's to deal with 0's produced by dividing by 0 on sundays """
         day_num = int(datetime.datetime.now().strftime('%d'))
         day_today = int(datetime.datetime.today().weekday() + 1)
-        if day_today == 7:
-            return 0
-        elif day_today == 1:
-            return 7
+        if day_today > self.return_last_date():
+            return 8 - day_today
         else:
             return 7 - day_today
  
