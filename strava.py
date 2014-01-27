@@ -104,6 +104,14 @@ class Calcs(object):
                 layout_list.append(days + ':')
         return layout_list
 
+    def progress_percent(self):
+    """ gets percent complete for status bar. accounts for > 100% """
+        if (self.week_total_miles() / self.week_goal(45)) * 100 <= 100:
+            return (self.week_total_miles()/self.week_goal(45)) * 100
+        else:
+            return 100
+        
+
 
 
 

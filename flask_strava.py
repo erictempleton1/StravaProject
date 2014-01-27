@@ -21,6 +21,7 @@ def index_strava():
     avg_pace = '%.2f mins/mile avg pace' % calcs.avg_pace()
     week_goal = 'Week goal: %.0f miles' % calcs.week_goal(45)
     week_layout = calcs.week_layout()
+    week_percent = '%.0f' % calcs.progress_percent()
     
     results_list = [week_goal, week_miles, miles_remain, week_total_time,
                     num_runs, avg_miles, days_remain, avg_to_goal, avg_pace]
