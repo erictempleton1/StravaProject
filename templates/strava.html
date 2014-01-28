@@ -5,12 +5,12 @@
     <h3>
     {{ week_date }}
     </h3>
+    <div class="border"></div>
 		<ul>
     		{% for items in results_list %}
         		<li> {{ items }} </li>
     		{% endfor %}
     	</ul>
-        <br>
         <ul>
             {% for days in week_layout %}
                 <li> {{ days }} </li>
