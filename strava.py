@@ -16,7 +16,7 @@ class Calcs(object):
     def __init__(self):
         self.auth = Auth().connect()
         self.athlete_id = [ath_id['athlete']['id'] for ath_id in self.auth]           
-        self.moving_time = [time['moving_time'] / 60 for time in self.auth] # secs to mins   
+        self.moving_time = [time['moving_time'] for time in self.auth] # secs to mins   
         self.distance = [items['distance'] * 0.000621371 for items in self.auth] # meters to miles   
         self.date = [date['start_date'][:10] for date in self.auth]    
         self.map_polyline = [maps['map']['summary_polyline'] for maps in self.auth]    
@@ -28,7 +28,7 @@ class Calcs(object):
         return n
 
     def time_list(self):
-        return self.moving_time
+        return sum(self.moving_time) / 60
 
     def week_total_miles(self):   
         return sum(self.distance)   
@@ -71,8 +71,12 @@ class Calcs(object):
             return self.miles_remaining(self.week_goal(55)) / self.days_remaining()
 
     def avg_pace(self):
+        """ uses timedelta to convert secs to minutes. 
+            converted to string to slice of extra details for display """
+        avg_pace = sum(self.moving_time) / sum(self.distance)
+        convert_sec = str(datetime.timedelta(seconds=avg_pace))
         if len(self.distance) > 0:
-            return sum(self.moving_time) / sum(self.distance)
+            return convert_sec[2:7]
         else:
             return 0
 
