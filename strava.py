@@ -28,7 +28,9 @@ class Calcs(object):
         return n
 
     def time_list(self):
-        return sum(self.moving_time) / 60
+        time_secs = sum(self.moving_time)
+        time_display = str(datetime.timedelta(seconds=time_secs))
+        return time_display
 
     def week_total_miles(self):   
         return sum(self.distance)   
