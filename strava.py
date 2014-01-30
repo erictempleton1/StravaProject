@@ -24,8 +24,8 @@ class Calcs(object):
         self.activity_id = [act_id['id'] for act_id in self.auth]
         self.avg_speed = [spd['average_speed'] for spd in self.auth]
 
-    def week_goal(self, n):
-        return n
+    def week_goal(self):
+        return 55
 
     def time_list(self):
         time_secs = sum(self.moving_time)
@@ -41,36 +41,49 @@ class Calcs(object):
         else:
             return 0 
         
-    def miles_remaining(self, n):  
+    def miles_remaining(self):
         """ change n (goal) as needed """
-        miles_remaining = n - self.week_total_miles()
+        miles_remaining = self.week_goal() - self.week_total_miles()
         return int(miles_remaining)
         
     def week_total_time(self):   
         return sum(self.moving_time)
 
-    def return_last_date(self):
+    def last_date(self):
         """ handles error when there is no runs for a week yet """
+
         try:
             last_run = int(datetime.datetime.strptime(self.date[-1], '%Y-%m-%d').strftime('%d'))
+
         except IndexError:
-            last_run = 7
+            last_run = 0
+
+        return last_run
             
     def days_remaining(self):
         """ added if's to deal with 0's produced by dividing by 0 on sundays """
+
+        # returns day of the month from 1-31
         day_num = int(datetime.datetime.now().strftime('%d'))
-        day_today = int(datetime.datetime.today().weekday() + 1)
-        if day_today > self.return_last_date():
-            return 8 - day_today
-        else:
+
+        # return day of the week from 1-7
+        day_today = int(datetime.datetime.today().isoweekday())
+
+        # last_date() returns day of the month for last month
+        # accounts for if you have ran on a given day
+        if day_num == self.last_date():
             return 7 - day_today
+
+        # accounts for extra day if no run for the day yet
+        else:
+            return 8 - day_today
  
     def avg_to_goal(self):
         """ same as above, added if's to deal with 0's produced on sundays """
         if self.days_remaining() == 0:
             return 0
         else:
-            return self.miles_remaining(self.week_goal(55)) / self.days_remaining()
+            return float(self.miles_remaining()) / float(self.days_remaining())
 
     def avg_pace(self):
         """ uses timedelta to convert secs to minutes. 
@@ -107,13 +120,6 @@ class Calcs(object):
             else:
                 layout_list.append(days + ':')
         return layout_list
-
-    def progress_percent(self):
-        """ gets percent complete for status bar. accounts for > 100% """
-        if (self.week_total_miles() / self.week_goal(55)) * 100 <= 100:
-            return (self.week_total_miles()/self.week_goal(55)) * 100
-        else:
-            return 100
         
 
 

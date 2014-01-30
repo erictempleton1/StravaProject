@@ -55,7 +55,13 @@ def avg_to_goal():
     if days_remaining() == 0:
         return 0
     else:
-        return miles_remaining() / days_remaining()
+        return float(miles_remaining()) / float(days_remaining())
 
-print week_total_miles(), miles_remaining(), avg_to_goal()
+print avg_to_goal()
+
+
+
+
+
+
 
