@@ -11,22 +11,23 @@ def index_strava():
     date = datetime.datetime.now()  
       
     week_date = 'Weekly Totals as of %s:' % date.strftime('%m/%d/%Y')
-    week_miles = '%.1f miles week to date' % calcs.week_total_miles()
+    week_miles = '%.1f miles' % calcs.week_total_miles()
     miles_remain = '%.1f miles remain' % calcs.miles_remaining()
-    week_total_time = '%s time week to date' % calcs.time_list() 
+    week_total_time = '%s total time' % calcs.time_list() 
     num_runs = calcs.num_runs()
     avg_miles = '%.1f avg miles per day' % calcs.avg_miles() 
-    days_remain = '%.0f days remaining this week' % calcs.days_remaining()
-    avg_to_goal = '%.1f miles per day to reach goal' % calcs.avg_to_goal()
+    days_remain = '%.0f days remaining' % calcs.days_remaining()
+    avg_to_goal = '%.1f miles/day to reach goal' % calcs.avg_to_goal()
     avg_pace = '%s mins/mile avg pace' % calcs.avg_pace()
     week_goal = 'Week goal: %.0f miles' % calcs.week_goal()
     week_layout = calcs.week_layout()
-    
-    results_list = [week_goal, week_miles, miles_remain, week_total_time,
-                    num_runs, avg_miles, days_remain, avg_to_goal, avg_pace]
 
-    return render_template('strava.html', week_date=week_date, results_list=results_list,
-                            week_layout=week_layout)
+    week_totals = [week_miles, num_runs, week_total_time, avg_miles, avg_pace]
+
+    week_goals = [week_goal, days_remain, miles_remain, avg_to_goal] 
+
+    return render_template('strava.html', week_date=week_date, week_totals=week_totals,
+                            week_goals=week_goals, week_layout=week_layout)
 
 @app_strava.route('/test')
 def form():

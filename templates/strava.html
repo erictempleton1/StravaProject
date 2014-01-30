@@ -1,19 +1,33 @@
 <html>
-<head><link rel="stylesheet" href="http://www.runthescript.com/miles_app/style.css" type="text/css"/></head>
-<title>Dashboard</title>
+<head>
+<link rel="stylesheet" href="http://www.runthescript.com/miles_app/style.css" type="text/css"/>
+<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+</head>
+<title>MilesDash</title>
 <body>
     <h3>
-    {{ week_date }}
+    MilesDash
     </h3>
     <div class="border"></div>
+
+        <div class="bodytext">{{ week_date }}</div>
 		<ul>
-    		{% for items in results_list %}
+    		{% for items in week_totals %}
         		<li> {{ items }} </li>
     		{% endfor %}
     	</ul>
+
+        <div class="bodytext">Weekly Goals:</div>
+        <ul>
+            {% for items in week_goals %}
+                <li> {{ items }} </li>
+            {% endfor %}
+        </ul>
+
+        <div class="bodytext">Miles for the Week:</div>
         <ul>
             {% for days in week_layout %}
-                <li> {{ days }} </li>
+               <li> {{ days }} </li>
             {% endfor %}
         </ul>
     <div class="border"></div>
