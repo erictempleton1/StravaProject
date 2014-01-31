@@ -116,7 +116,7 @@ class Calcs(object):
         for days in day_list:
             if days in date_names:
                 count += 1
-                layout_list.append(days + ': %.02f miles' % self.distance[count])
+                layout_list.append(days + ': %.01f miles' % self.distance[count])
             else:
                 layout_list.append(days + ':')
         return layout_list
