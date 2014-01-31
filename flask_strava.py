@@ -15,7 +15,7 @@ def index_strava():
     miles_remain = '%.1f miles remain' % calcs.miles_remaining()
     week_total_time = '%s total time' % calcs.time_list() 
     num_runs = calcs.num_runs()
-    avg_miles = '%.1f avg miles per day' % calcs.avg_miles() 
+    avg_miles = '%.1f avg miles/day' % calcs.avg_miles() 
     days_remain = '%.0f days remaining' % calcs.days_remaining()
     avg_to_goal = '%.1f miles/day to reach goal' % calcs.avg_to_goal()
     avg_pace = '%s mins/mile avg pace' % calcs.avg_pace()
