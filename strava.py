@@ -122,11 +122,6 @@ class Calcs(object):
         return layout_list
 
 
-calcs = Calcs().miles_remaining()
-
-print calcs
-
-
         
 
 
