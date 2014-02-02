@@ -19,10 +19,8 @@ def date_monday():
     mon_year = int(mon_date.strftime('%Y'))
     mon_monday = int(mon_date.strftime('%m'))
 
-    if current_year > mon_year:
-        return '%d/%s/%s' % (mon_monday, mon_num, mon_year)
-    else:
-        return '%d/%s/%s' % (now.month, mon_num, now.year)
+    
+    return '%d/%s/%s' % (mon_monday, mon_num, mon_year)
 
 def epoch_date(n):
     """ converts any given date in m/d/y format to unix epoch.
