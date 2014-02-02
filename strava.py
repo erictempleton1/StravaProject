@@ -120,6 +120,13 @@ class Calcs(object):
             else:
                 layout_list.append(days + ':')
         return layout_list
+
+
+calcs = Calcs().miles_remaining()
+
+print calcs
+
+
         
 
 
