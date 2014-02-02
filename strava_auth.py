@@ -9,7 +9,7 @@ class Auth(object):
         self.date_param = convert_date.epoch_date(convert_date.date_monday())
    
     def connect(self):
-        payload = {'access_token': 'b295cfca0cfdf8f23d3a94707337f56b77ce7354',
+        payload = {'access_token': 'e8a0059d272d880a129fba2ca321204394f99806',
                    'after': self.date_param}
         r = requests.get('https://www.strava.com/api/v3/athlete/activities', 
                           params=payload)           
