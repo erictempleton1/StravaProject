@@ -88,8 +88,15 @@ class Calcs(object):
     def avg_pace(self):
         """ uses timedelta to convert secs to minutes. 
             converted to string to slice of extra details for display """
-        avg_pace = sum(self.moving_time) / sum(self.distance)
+        try:
+            avg_pace = sum(self.moving_time) / sum(self.distance)
+
+        except ZeroDivisionError:
+            avg_pace = 0
+
         convert_sec = str(datetime.timedelta(seconds=avg_pace))
+        if self.distance == 0 or self.moving_time == 0:
+            return 0
         if len(self.distance) > 0:
             return convert_sec[2:7]
         else:
