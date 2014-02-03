@@ -49,19 +49,14 @@ class Calcs(object):
     def week_total_time(self):   
         return sum(self.moving_time)
 
-    def last_date(self):
-        """ handles error when there is no runs for a week yet """
+    def days_remaining(self):
+        """ added if's to deal with 0's produced by dividing by 0 on sundays """
 
         try:
             last_run = int(datetime.datetime.strptime(self.date[-1], '%Y-%m-%d').strftime('%d'))
 
         except IndexError:
             last_run = 0
-
-        return last_run
-            
-    def days_remaining(self):
-        """ added if's to deal with 0's produced by dividing by 0 on sundays """
 
         # returns day of the month from 1-31
         day_num = int(datetime.datetime.now().strftime('%d'))
@@ -71,7 +66,7 @@ class Calcs(object):
 
         # last_date() returns day of the month for last month
         # accounts for if you have ran on a given day
-        if day_num == self.last_date():
+        if day_num == last_run:
             return 7 - day_today
 
         # accounts for extra day if no run for the day yet
