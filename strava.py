@@ -52,6 +52,7 @@ class Calcs(object):
     def days_remaining(self):
         """ added if's to deal with 0's produced by dividing by 0 on sundays """
 
+        # if there is no run yet, IndexError is returned
         try:
             last_run = int(datetime.datetime.strptime(self.date[-1], '%Y-%m-%d').strftime('%d'))
 
