@@ -116,16 +116,13 @@ class Calcs(object):
         layout_count = -1
         name_count = 1
         for days in self.day_list:
-
             if days in self.date_names and self.date_names.count(days) > 1:
                 name_count += self.date_names.count(days) # end range for sum below.
                 sum_extra = sum(self.distance[self.date_names.index(days):name_count]) # only sums matching days
                 layout_list.append(days + ': %.01f miles' % sum_extra)
-
             elif days in self.date_names:
                 layout_count += 1
                 layout_list.append(days + ': %.01f miles' % self.distance[layout_count])
-
             else:
                 layout_list.append(days + ':')
 
