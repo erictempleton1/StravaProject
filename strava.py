@@ -109,7 +109,8 @@ class Calcs(object):
             return '%.0f runs' % len(self.distance)
 
     def week_layout(self):
-        """ displays weekdays with corresponding mileage """
+        """ displays weekdays with corresponding mileage. checks if count is more than one,
+            then sums amounts based on their index position. in theory this should work... """
   
         layout_list = []
         layout_count = -1
