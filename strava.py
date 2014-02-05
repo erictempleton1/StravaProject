@@ -23,6 +23,9 @@ class Calcs(object):
         self.calories = [cals['calories'] for cals in self.auth]   
         self.activity_id = [act_id['id'] for act_id in self.auth]
         self.avg_speed = [spd['average_speed'] for spd in self.auth]
+        self.date_names = [datetime.datetime.strptime(dates, '%Y-%m-%d').strftime('%A') for dates in self.date]
+        self.day_list = ['Monday', 'Tuesday', 'Wednesday', 'Thursday',
+                    'Friday', 'Saturday', 'Sunday']
 
     def week_goal(self):
         return 55
@@ -107,21 +110,24 @@ class Calcs(object):
 
     def week_layout(self):
         """ displays weekdays with corresponding mileage """
-
-        # returns date names to match against day_list
-        date_names = [datetime.datetime.strptime(dates, '%Y-%m-%d').strftime('%A') for dates in self.date]
-        day_list = ['Monday', 'Tuesday', 'Wednesday', 'Thursday',
-                    'Friday', 'Saturday', 'Sunday']
-        
-        
+  
         layout_list = []
-        count = -1
-        for days in day_list:
-            if days in date_names:
-                count += 1
-                layout_list.append(days + ': %.01f miles' % self.distance[count])
+        layout_count = -1
+        name_count = 1
+        for days in self.day_list:
+
+            if days in self.date_names and self.date_names.count(days) > 1:
+                name_count += self.date_names.count(days) # end range for sum below.
+                sum_extra = sum(self.distance[self.date_names.index(days):name_count]) # only sums matching days
+                layout_list.append(days + ': %.01f miles' % sum_extra)
+
+            elif days in self.date_names:
+                layout_count += 1
+                layout_list.append(days + ': %.01f miles' % self.distance[layout_count])
+
             else:
                 layout_list.append(days + ':')
+
         return layout_list
 
 
