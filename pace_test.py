@@ -10,6 +10,8 @@ day_list = ['Monday', 'Tuesday', 'Wednesday', 'Thursday',
             'Friday', 'Saturday', 'Sunday']
 date_names = [datetime.datetime.strptime(dates, '%Y-%m-%d').strftime('%A') for dates in date]
 
+day_distance = zip(date_names, distance)
+
 
 def week_layout():
     """ displays weekdays with corresponding mileage """
@@ -23,9 +25,13 @@ def week_layout():
             layout_list.append(days + ':')
     return layout_list
 
-print week_layout()
+#print week_layout()
+
+day_distance = zip(date_names, distance)
 
 
+for day in enumerate(day_distance):
+    print day[1][0], day[1][1]
 
 
 
