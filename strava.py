@@ -112,7 +112,7 @@ class Calcs(object):
         """ displays weekdays with corresponding mileage. """
         layout_list = []
         layout_count = -1
-            elif days in self.date_names:
+            if days in self.date_names:
                 layout_count += 1
                 layout_list.append(days + ': %.01f miles' % self.distance[layout_count])
             else:
