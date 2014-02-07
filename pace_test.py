@@ -29,10 +29,7 @@ def week_layout():
 
 day_distance = zip(date_names, distance)
 
-
-for day in enumerate(day_distance):
-    print day[1][0], day[1][1]
-
+enum_list = [day for day in enumerate(day_distance) if day[1][0] in day_list]
 
 
 
