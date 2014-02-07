@@ -6,12 +6,8 @@ auth = Auth().connect()
 
 date = [date['start_date'][:10] for date in auth]
 distance = [items['distance'] * 0.000621371 for items in auth]
-day_list = ['Monday', 'Tuesday', 'Wednesday', 'Thursday',
-            'Friday', 'Saturday', 'Sunday']
+day_list = ['Monday', 'Tuesday', 'Wednesday', 'Thursday','Friday', 'Saturday', 'Sunday']
 date_names = [datetime.datetime.strptime(dates, '%Y-%m-%d').strftime('%A') for dates in date]
-
-day_distance = zip(date_names, distance)
-
 
 def week_layout():
     """ displays weekdays with corresponding mileage """
@@ -25,13 +21,17 @@ def week_layout():
             layout_list.append(days + ':')
     return layout_list
 
-#print week_layout()
-
 day_distance = zip(date_names, distance)
 
-for items in enumerate(day_list):
-    print items[1]
+# print day_distance[3][0] # returns 'Thursday'
 
+# days[1] returns days names from day_list
+
+layout_list = []
+for days in day_distance:
+    layout_list.append('%s: %.02f miles' % (days[0], days[1]))
+
+print layout_list
 
 
 

@@ -110,14 +110,10 @@ class Calcs(object):
 
     def week_layout(self):
         """ displays weekdays with corresponding mileage. """
+        day_distance = zip(self.date_names, self.distance)
         layout_list = []
-        layout_count = -1
-        for days in self.day_list:
-            if days in self.date_names:
-                layout_count += 1
-                layout_list.append(days + ': %.01f miles' % self.distance[layout_count])
-            else:
-                layout_list.append(days + ':')
+        for days in day_distance:
+            layout_list.append('%s: %.02f miles' % (days[0], days[1]))
         return layout_list
 
 
