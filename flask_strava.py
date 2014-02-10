@@ -2,9 +2,19 @@ import datetime
 from strava import Calcs
 from flask import Flask, render_template, request, redirect, flash
 from contact_form import ContactForm
+from flask_mail import Message, Mail
+
 
 app_strava = Flask(__name__)
 app_strava.secret_key = 'dev key'
+
+mail = Mail()
+app_strava.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app_strava.config['MAIL_PORT'] = 465
+app_strava.config['MAIL_USE_SSL'] = True
+app_strava.config['MAIL_USERNAME'] = 'milesdash4@gmail.com'
+app_strava.config['MAIL_PASSWORD'] = 'milesdash'
+mail.init_app(app_strava)
 
 
 @app_strava.route('/')
