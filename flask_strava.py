@@ -1,7 +1,10 @@
 import datetime
 from strava import Calcs
 from flask import Flask, render_template, request, redirect
+from contact_form import ContactForm
+
 app_strava = Flask(__name__)
+app_strava.secret_key = 'dev key'
 
 
 @app_strava.route('/')
@@ -28,6 +31,16 @@ def index_strava():
 
     return render_template('strava.html', week_date=week_date, week_totals=week_totals,
                             week_goals=week_goals, week_layout=week_layout)
+
+@app_strava.route('/contact', methods=['GET', 'POST'])
+def contact():
+    form = ContactForm()
+
+    if request.method == 'POST':
+        return 'Form posted'
+
+    elif request.method == 'GET':
+        return render_template('contact.html', form=form)
 
 @app_strava.route('/test')
 def form():

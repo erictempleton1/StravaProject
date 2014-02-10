@@ -1,0 +1,37 @@
+<html>
+<head>
+<link rel="stylesheet" href="http://www.runthescript.com/miles_app/style.css" type="text/css"/>
+<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+</head>
+<title>MilesDash</title>
+<body>
+  <div id="content">
+    <h3>
+    MilesDash
+    </h3>
+    <div class="border"></div>
+
+    <h4>Contact</h4>
+    <form action="{{ url_for('contact') }}" method=post>
+        {{ form.hidden_tag() }}
+        
+        {{ form.name.label }}
+        {{ form.name }}
+
+        {{ form.email.label }}
+        {{ form.email }}
+ 
+        {{ form.subject.label }}
+        {{ form.subject }}
+
+        {{ form.message.label }}
+        {{ form.message }}
+
+        {{ form.submit }}
+    </form>
+
+    <div class="border"></div>
+  </div>
+</body>
+</html>
+
