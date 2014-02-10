@@ -11,6 +11,23 @@
     </h3>
     <div class="border"></div>
 
+    {% for message in form.name.errors %}
+       <div class="flash">{{ message }}</div>
+    {% endfor %}
+
+    {% for message in form.email.errors %}
+       <div class="flash">{{ message }}</div>
+    {% endfor %}
+
+    {% for message in form.subject.errors %}
+       <div class="flash">{{ message }}</div>
+    {% endfor %}
+
+    {% for message in form.message.errors %}
+       <div class="flash">{{ message }}</div>
+    {% endfor %}
+
+
     <h4>Contact</h4>
     <form action="{{ url_for('contact') }}" method=post>
         {{ form.hidden_tag() }}

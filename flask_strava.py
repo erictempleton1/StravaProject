@@ -1,6 +1,6 @@
 import datetime
 from strava import Calcs
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, flash
 from contact_form import ContactForm
 
 app_strava = Flask(__name__)
@@ -37,6 +37,9 @@ def contact():
     form = ContactForm()
 
     if request.method == 'POST':
+        if form.validate() == False:
+            flash('All fields are required')
+            return render_template('contact.html', form=form)    
         return 'Form posted'
 
     elif request.method == 'GET':

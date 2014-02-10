@@ -1,10 +1,10 @@
 from flask.ext.wtf import Form
-from wtforms.fields import TextField, TextAreaField, SubmitField
+from wtforms import TextField, TextAreaField, SubmitField, validators
 
 class ContactForm(Form):
-    name = TextField('Name')
-    email = TextField('Email')
-    subject = TextField('Subject')
-    message = TextAreaField('Message')
+    name = TextField('Name', [validators.Required('Please enter your name')])
+    email = TextField('Email', [validators.Required('Please enter your email'), validators.Email('Please enter your email')])
+    subject = TextField('Subject', [validators.Required('Please enter a subject')])
+    message = TextAreaField('Message', [validators.Required('Please enter a message')])
     submit = SubmitField('Send')
 
