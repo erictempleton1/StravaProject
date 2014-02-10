@@ -11,6 +11,10 @@
     </h3>
     <div class="border"></div>
 
+    {% if success %}
+        <p>Thanks for your message.</p>
+    {% else %}
+
     {% for message in form.name.errors %}
        <div class="flash">{{ message }}</div>
     {% endfor %}
@@ -46,6 +50,7 @@
 
         {{ form.submit }}
     </form>
+    {% endif %}
 
     <div class="border"></div>
   </div>
