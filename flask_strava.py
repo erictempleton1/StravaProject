@@ -52,7 +52,7 @@ def contact():
             return render_template('contact.html', form=form)
         else: 
             msg = Message(form.subject.data, sender = 'milesdash4@gmail.com', 
-                        recipients = ['erictempleton1@gmail.com'])
+                        recipients = ['milesdash4@gmail.com'])
             msg.body = """From: %s <%s> %s""" % (form.name.data, form.email.data,
                                               form.message.data)
             mail.send(msg)
