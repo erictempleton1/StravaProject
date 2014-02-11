@@ -8,15 +8,6 @@ from flask_mail import Message, Mail
 app_strava = Flask(__name__)
 app_strava.secret_key = 'dev key'
 
-mail = Mail()
-app_strava.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app_strava.config['MAIL_PORT'] = 465
-app_strava.config['MAIL_USE_SSL'] = True
-app_strava.config['MAIL_USERNAME'] = 'milesdash4@gmail.com'
-app_strava.config['MAIL_PASSWORD'] = 'milesdash'
-mail.init_app(app_strava)
-
-
 @app_strava.route('/')
 def index_strava():
     calcs = Calcs()
@@ -41,6 +32,15 @@ def index_strava():
 
     return render_template('strava.html', week_date=week_date, week_totals=week_totals,
                             week_goals=week_goals, week_layout=week_layout)
+
+# setup for contact form
+mail = Mail()
+app_strava.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app_strava.config['MAIL_PORT'] = 465
+app_strava.config['MAIL_USE_SSL'] = True
+app_strava.config['MAIL_USERNAME'] = 'milesdash4@gmail.com'
+app_strava.config['MAIL_PASSWORD'] = 'milesdash'
+mail.init_app(app_strava)
 
 @app_strava.route('/contact', methods=['GET', 'POST'])
 def contact():

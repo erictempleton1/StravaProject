@@ -1,18 +1,10 @@
-<html>
-<head>
-<link rel="stylesheet" href="http://www.runthescript.com/miles_app/style.css" type="text/css"/>
-<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-</head>
-<title>MilesDash</title>
-<body>
-  <div id="content">
-    <h3>
-    MilesDash
-    </h3>
-    <div class="border"></div>
+{% extends "base.html" %}
+{% block content %}
 
     {% if success %}
-        <p>Thanks for your message.</p>
+        <div class="bodytext">
+          Thanks for your message.
+       </div>
     {% else %}
 
     {% for message in form.name.errors %}
@@ -52,8 +44,5 @@
     </form>
     {% endif %}
 
-    <div class="border"></div>
-  </div>
-</body>
-</html>
+{% endblock %}
 
