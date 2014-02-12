@@ -64,6 +64,13 @@ def contact():
 @app_strava.route('/form_test', methods = ['GET', 'POST'])
 def form_test():
     form = GoalForm()
+    if request.method == 'POST' and form.validate() == True:
+        goal = form.goal.data
+        return render_template('test_return.html', goal=goal)
+    else:
+        flash('All fields are required')
+        return render_template('form_test.html', form=form)
+
     return render_template('form_test.html', form=form)
 
 
