@@ -1,7 +1,7 @@
 import datetime
 from strava import Calcs
 from flask import Flask, render_template, request, redirect, flash
-from contact_form import ContactForm
+from forms import ContactForm, GoalForm
 from flask_mail import Message, Mail
 
 
@@ -56,19 +56,16 @@ def contact():
             msg.body = """From: %s <%s> %s""" % (form.name.data, form.email.data,
                                               form.message.data)
             mail.send(msg)
-            return render_template('contact.html', success = True)
+            return render_template('contact.html', success=True)
         
     elif request.method == 'GET':
         return render_template('contact.html', form=form)
 
-@app_strava.route('/test')
-def form():
-    return render_template('forms.html')
+@app_strava.route('/form_test', methods = ['GET', 'POST'])
+def form_test():
+    form = GoalForm()
+    return render_template('form_test.html', form=form)
 
-@app_strava.route('/response', methods=['POST'])
-def hello():
-    name=request.form['yourname']
-    return render_template('form_action.html', name=name)
 
 if __name__ == '__main__':
     app_strava.run(debug=True)
