@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 
+    {% for message in form.goal.errors %}
+       <div class="flash">{{ message }}</div>
+    {% endfor %}
+
     <form action="{{ url_for('form_test') }}" method="post">
         {{ form.hidden_tag() }}
         
