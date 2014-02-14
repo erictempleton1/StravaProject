@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 
+    {% if success %}
+    <div class="bodytext">Weekly Goals:</div>
+        <ul>
+            {% for items in week_goals %}
+                <li> {{ items }} </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+
     {% for message in form.goal.errors %}
        <div class="flash">{{ message }}</div>
     {% endfor %}
@@ -14,5 +23,5 @@
         {{ form.submit }}
     </form>
 
-
+{% endif %}
 {% endblock %}

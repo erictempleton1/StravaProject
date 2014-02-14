@@ -27,8 +27,8 @@ class Calcs(object):
         self.day_list = ['Monday', 'Tuesday', 'Wednesday', 'Thursday',
                     'Friday', 'Saturday', 'Sunday']
 
-    def week_goal(self):
-        return 55
+    def week_goal(self, n):
+        return n
 
     def time_list(self):
         time_secs = sum(self.moving_time)
@@ -44,9 +44,9 @@ class Calcs(object):
         else:
             return 0 
         
-    def miles_remaining(self):
+    def miles_remaining(self, n):
         """ change n (goal) as needed """
-        miles_remaining = self.week_goal() - self.week_total_miles()
+        miles_remaining = self.week_goal(n) - self.week_total_miles()
         return int(miles_remaining)
         
     def week_total_time(self):   
@@ -77,12 +77,12 @@ class Calcs(object):
         else:
             return 8 - day_today
  
-    def avg_to_goal(self):
+    def avg_to_goal(self, n):
         """ same as above, added if's to deal with 0's produced on sundays """
         if self.days_remaining() == 0:
             return 0
         else:
-            return float(self.miles_remaining()) / float(self.days_remaining())
+            return float(self.miles_remaining(n)) / float(self.days_remaining())
 
     def avg_pace(self):
         """ uses timedelta to convert secs to minutes. 

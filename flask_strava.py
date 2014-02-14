@@ -17,22 +17,17 @@ class Routes(object):
       
         week_date = 'Weekly Totals as of %s:' % date.strftime('%m/%d/%Y')
         week_miles = '%.1f miles' % calcs.week_total_miles()
-        miles_remain = '%.1f miles remain' % calcs.miles_remaining()
         week_total_time = '%s total time' % calcs.time_list() 
         num_runs = calcs.num_runs()
         avg_miles = '%.1f avg miles/run' % calcs.avg_miles() 
-        days_remain = '%.0f days remaining' % calcs.days_remaining()
-        avg_to_goal = '%.1f miles/day to reach goal' % calcs.avg_to_goal()
         avg_pace = '%s mins/mile avg pace' % calcs.avg_pace()
-        week_goal = 'Week goal: %.0f miles' % calcs.week_goal()
         week_layout = calcs.week_layout()
 
         week_totals = [week_miles, num_runs, week_total_time, avg_miles, avg_pace]
 
-        week_goals = [week_goal, days_remain, miles_remain, avg_to_goal] 
 
         return render_template('strava.html', week_date=week_date, week_totals=week_totals,
-                            week_goals=week_goals, week_layout=week_layout)
+                            week_layout=week_layout)
 
 
     @app_strava.route('/contact', methods=['GET', 'POST'])
@@ -63,15 +58,22 @@ class Routes(object):
 
     @app_strava.route('/form_test', methods = ['GET', 'POST'])
     def form_test():
+        calcs = Calcs()
         form = GoalForm()
+
         if request.method == 'POST' and form.validate() == True:
             goal = form.goal.data
-            return render_template('test_return.html', goal=goal)
+            avg_to_goal = '%.1f miles/day to reach goal' % calcs.avg_to_goal(goal)
+            miles_remain = '%.1f miles remain' % calcs.miles_remaining(goal)
+            days_remain = '%.0f days remaining' % calcs.days_remaining()
+            week_goal = 'Week goal: %.0f miles' % calcs.week_goal(goal)
+            week_goals = [week_goal, days_remain, miles_remain, avg_to_goal]
+            return render_template('form_test.html', week_goals=week_goals, success=True, form=form)
+        elif request.method == 'GET':
+            return render_template('contact.html', form=form)
         else:
             flash('Please enter a number from 1-100')
             return render_template('form_test.html', form=form)
-
-        return render_template('form_test.html', form=form)
 
 
 if __name__ == '__main__':
