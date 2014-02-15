@@ -56,7 +56,7 @@ class Routes(object):
             return render_template('contact.html', form=form)
             
 
-    @app_strava.route('/form_test', methods = ['GET', 'POST'])
+    @app_strava.route('/goal', methods = ['GET', 'POST'])
     def form_test():
         calcs = Calcs()
         form = GoalForm()
@@ -68,12 +68,10 @@ class Routes(object):
             days_remain = '%.0f days remaining' % calcs.days_remaining()
             week_goal = 'Week goal: %.0f miles' % calcs.week_goal(goal)
             week_goals = [week_goal, days_remain, miles_remain, avg_to_goal]
-            return render_template('form_test.html', week_goals=week_goals, success=True, form=form)
-        elif request.method == 'GET':
-            return render_template('contact.html', form=form)
+            return render_template('goals.html', week_goals=week_goals, success=True, form=form)
         else:
             flash('Please enter a number from 1-100')
-            return render_template('form_test.html', form=form)
+            return render_template('goals.html', form=form)
 
 
 if __name__ == '__main__':

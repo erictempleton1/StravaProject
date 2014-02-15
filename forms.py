@@ -9,5 +9,5 @@ class ContactForm(Form):
     submit = SubmitField('Send')
 
 class GoalForm(Form):
-    goal = IntegerField('Goal', [validators.NumberRange(min=1, max=150), validators.Required('Please enter a number from 1 to 150')])
+    goal = IntegerField('Week Goal (1 - 150 miles)', [validators.NumberRange(min=1, max=150), validators.Required('Please enter a number from 1 to 150')])
     submit = SubmitField('Submit')
