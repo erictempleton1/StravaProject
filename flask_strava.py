@@ -56,7 +56,7 @@ class Routes(object):
             return render_template('contact.html', form=form)
             
 
-    @app_strava.route('/goal', methods = ['GET', 'POST'])
+    @app_strava.route('/goals', methods = ['GET', 'POST'])
     def form_test():
         calcs = Calcs()
         form = GoalForm()

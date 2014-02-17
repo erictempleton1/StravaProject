@@ -6,14 +6,23 @@
 <title>MilesDash</title>
 <body>
   <div id="content">
-    <h3>
-    <a href="http://milesdash.herokuapp.com">MilesDash</a>
-    </h3>
+    <span id="mainlogo">
+      <a href="http://milesdash.herokuapp.com">MilesDash</a>
+    </span>
+    <span class="toplinks">
+      <a href="http://milesdash.herokuapp.com">Totals</a>
+      <a href="http://milesdash.herokuapp.com/goals">Goals</a>
+    </span>
     <div class="border"></div>
 
     {% block content %}{% endblock %}
 
 	<div class="border"></div>
+      <div class="bottomlinks">
+        <a href="http://milesdash.herokuapp.com/contact">Contact</a>
+        <a href="https://github.com/erictempleton1/StravaProject">GitHub</a>
+        <a href="https://twitter.com/etemple10">Twitter</a>
+      </div>
   </div>
 </body>
 </html>
