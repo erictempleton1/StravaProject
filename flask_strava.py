@@ -20,7 +20,7 @@ class Routes(object):
         week_miles = '%.1f miles' % calcs.week_total_miles()
         week_total_time = '%s total time' % calcs.time_list() 
         num_runs = calcs.num_runs()
-        avg_miles = '%.1f avg miles/run' % calcs.avg_miles() 
+        avg_miles = '%.1f miles/run' % calcs.avg_miles() 
         avg_pace = '%s mins/mile avg pace' % calcs.avg_pace()
 
         # Mon - Sun per day miles including doubles
