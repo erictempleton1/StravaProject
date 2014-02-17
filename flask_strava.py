@@ -28,19 +28,8 @@ class Routes(object):
 
         week_totals = [week_miles, num_runs, week_total_time, avg_miles, avg_pace]
 
-        if request.method == 'POST' and form.validate() == True:
-            goal = form.goal.data
-            avg_to_goal = '%.1f miles/day to reach goal' % calcs.avg_to_goal(goal)
-            miles_remain = '%.1f miles remain' % calcs.miles_remaining(goal)
-            days_remain = '%.0f days remaining' % calcs.days_remaining()
-            week_goal = 'Week goal: %.0f miles' % calcs.week_goal(goal)
-            week_goals = [avg_to_goal, miles_remain, days_remain, week_goal]
-
-            return render_template('strava.html', week_goals=week_goals, success=True, form=form)
-
-        else:
-            return render_template('strava.html', week_date=week_date, week_totals=week_totals,
-                                    week_layout=week_layout)
+        return render_template('strava.html', week_date=week_date, week_totals=week_totals,
+                                week_layout=week_layout)
 
 
     @app_strava.route('/contact', methods=['GET', 'POST'])
