@@ -67,8 +67,6 @@ class Routes(object):
         else: 
             flash('All fields are required')
             return render_template('contact.html', form=form)
-<<<<<<< HEAD
-            
 
     @app_strava.route('/goals', methods = ['GET', 'POST'])
     def form_test():
@@ -86,9 +84,6 @@ class Routes(object):
         else:
             flash('Please enter a number from 1-100')
             return render_template('goals.html', form=form)
-=======
->>>>>>> 6b25d57425f9a6ecb2316fde74b1cfa06e7ad16e
-
 
 if __name__ == '__main__':
     app_strava.run(debug=True)
