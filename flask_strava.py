@@ -9,9 +9,10 @@ app_strava.secret_key = 'dev key'
 
 class Routes(object):
 
-    @app_strava.route('/')
+    @app_strava.route('/', methods=['GET', 'POST'])
     def index_strava():
         calcs = Calcs()
+        form = GoalForm()
 
         date = datetime.datetime.now()  
       
@@ -21,13 +22,25 @@ class Routes(object):
         num_runs = calcs.num_runs()
         avg_miles = '%.1f avg miles/run' % calcs.avg_miles() 
         avg_pace = '%s mins/mile avg pace' % calcs.avg_pace()
+
+        # Mon - Sun per day miles including doubles
         week_layout = calcs.week_layout()
 
         week_totals = [week_miles, num_runs, week_total_time, avg_miles, avg_pace]
 
+        if request.method == 'POST' and form.validate() == True:
+            goal = form.goal.data
+            avg_to_goal = '%.1f miles/day to reach goal' % calcs.avg_to_goal(goal)
+            miles_remain = '%.1f miles remain' % calcs.miles_remaining(goal)
+            days_remain = '%.0f days remaining' % calcs.days_remaining()
+            week_goal = 'Week goal: %.0f miles' % calcs.week_goal(goal)
+            week_goals = [avg_to_goal, miles_remain, days_remain, week_goal]
 
-        return render_template('strava.html', week_date=week_date, week_totals=week_totals,
-                            week_layout=week_layout)
+            return render_template('strava.html', week_goals=week_goals, success=True, form=form)
+
+        else:
+            return render_template('strava.html', week_date=week_date, week_totals=week_totals,
+                                    week_layout=week_layout)
 
 
     @app_strava.route('/contact', methods=['GET', 'POST'])
@@ -54,6 +67,7 @@ class Routes(object):
         else: 
             flash('All fields are required')
             return render_template('contact.html', form=form)
+<<<<<<< HEAD
             
 
     @app_strava.route('/goals', methods = ['GET', 'POST'])
@@ -72,6 +86,8 @@ class Routes(object):
         else:
             flash('Please enter a number from 1-100')
             return render_template('goals.html', form=form)
+=======
+>>>>>>> 6b25d57425f9a6ecb2316fde74b1cfa06e7ad16e
 
 
 if __name__ == '__main__':

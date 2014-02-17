@@ -15,4 +15,30 @@
             {% endfor %}
         </ul>
 
+<<<<<<< HEAD
+=======
+        {% if success %}
+        <div class="bodytext">Weekly Goals:</div>
+            <ul>
+                {% for items in week_goals %}
+                    <li> {{ items }} </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+
+    {% for message in form.goal.errors %}
+       <div class="flash">{{ message }}</div>
+    {% endfor %}
+
+    <form action="{{ url_for('index_strava') }}" method="post">
+        {{ form.hidden_tag() }}
+        
+        {{ form.goal.label }}
+        {{ form.goal }}
+
+        {{ form.submit }}
+    </form>
+
+{% endif %}
+>>>>>>> 6b25d57425f9a6ecb2316fde74b1cfa06e7ad16e
 {% endblock %}
