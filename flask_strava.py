@@ -67,8 +67,8 @@ class Routes(object):
             avg_to_goal = '%.1f miles/day to reach goal' % calcs.avg_to_goal(goal)
             miles_remain = '%.1f miles remain' % calcs.miles_remaining(goal)
             days_remain = '%.0f days remaining' % calcs.days_remaining()
-            week_goal = 'Week goal: %.0f miles' % calcs.week_goal(goal)
-            week_goals = [week_goal, days_remain, miles_remain, avg_to_goal]
+            week_goal = '%.0f miles' % calcs.week_goal(goal)
+            week_goals = [week_goal, miles_remain, days_remain, avg_to_goal]
             return render_template('goals.html', week_goals=week_goals, success=True, form=form)
         else:
             flash('Please enter a number from 1-100')

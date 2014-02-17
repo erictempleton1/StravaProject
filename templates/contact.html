@@ -25,6 +25,7 @@
 
 
     <h4>Contact</h4>
+    <div id="contactlabel">
     <form action="{{ url_for('contact') }}" method="post">
         {{ form.hidden_tag() }}
         
@@ -42,6 +43,7 @@
         <br>
         {{ form.submit }}
     </form>
+    </div>
     {% endif %}
 
 {% endblock %}
