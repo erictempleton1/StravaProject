@@ -29,7 +29,7 @@ class Routes(object):
         week_totals = [week_miles, num_runs, week_total_time, avg_miles, avg_pace]
 
         return render_template('strava.html', week_date=week_date, week_totals=week_totals,
-                                week_layout=week_layout)
+                                week_layout=week_layout, title='Home')
 
 
     @app_strava.route('/contact', methods=['GET', 'POST'])
@@ -50,12 +50,12 @@ class Routes(object):
                 msg = Message(form.subject.data, sender = 'milesdash4@gmail.com', recipients = ['milesdash4@gmail.com'])
                 msg.body = 'From: %s <%s> %s' % (form.name.data, form.email.data,form.message.data)
                 mail.send(msg)
-                return render_template('contact.html', success=True)
+                return render_template('contact.html', success=True, title='Contact')
         elif request.method == 'GET':
-            return render_template('contact.html', form=form)
+            return render_template('contact.html', form=form, title='Contact')
         else: 
             flash('All fields are required')
-            return render_template('contact.html', form=form)
+            return render_template('contact.html', form=form, title='Contact')
 
     @app_strava.route('/goals', methods = ['GET', 'POST'])
     def form_test():
@@ -69,10 +69,10 @@ class Routes(object):
             days_remain = '%.0f days remaining' % calcs.days_remaining()
             week_goal = '%.0f miles' % calcs.week_goal(goal)
             week_goals = [week_goal, miles_remain, days_remain, avg_to_goal]
-            return render_template('goals.html', week_goals=week_goals, success=True, form=form)
+            return render_template('goals.html', week_goals=week_goals, success=True, form=form, title='Goals')
         else:
             flash('Please enter a number from 1-100')
-            return render_template('goals.html', form=form)
+            return render_template('goals.html', form=form, title='Goals')
 
 if __name__ == '__main__':
     app_strava.run(debug=True)
