@@ -20,7 +20,6 @@ class Calcs(object):
         self.distance = [items['distance'] * 0.000621371 for items in self.auth] # meters to miles   
         self.date = [date['start_date'][:10] for date in self.auth]    
         self.map_polyline = [maps['map']['summary_polyline'] for maps in self.auth]    
-        self.calories = [cals['calories'] for cals in self.auth]   
         self.activity_id = [act_id['id'] for act_id in self.auth]
         self.avg_speed = [spd['average_speed'] for spd in self.auth]
         self.date_names = [datetime.datetime.strptime(dates, '%Y-%m-%d').strftime('%A') for dates in self.date]
