@@ -1,6 +1,6 @@
 import datetime
 from strava import Calcs
-from flask import Flask, render_template, request, redirect, flash
+from flask import Flask, render_template, request, redirect, flash, url_for
 from forms import GoalForm
 from flask_mail import Message, Mail
 
@@ -43,10 +43,10 @@ def goals():
         days_remain = '%.0f days remaining' % calcs.days_remaining()
         week_goal = '%.0f miles' % calcs.week_goal(goal)
         week_goals = [week_goal, miles_remain, days_remain, avg_to_goal]
-        return render_template('strava.html', week_goals=week_goals, success=True, form=form, title='Goals')
+        return redirect(url_for('index_strava'))
     else:
         flash('Please enter a number from 1-100')
-        return render_template('strava.html', form=form, title='Goals')
+        return redirect(url_for('index_strava'))
 
 if __name__ == '__main__':
     app_strava.run(debug=True)
