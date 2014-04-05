@@ -32,31 +32,6 @@ class Routes(object):
                                 week_layout=week_layout, title='Home')
 
 
-    @app_strava.route('/contact', methods=['GET', 'POST'])
-    def contact():
-        form = ContactForm()
-
-        # setup for contact form
-        mail = Mail()
-        app_strava.config['MAIL_SERVER'] = 'smtp.gmail.com'
-        app_strava.config['MAIL_PORT'] = 465
-        app_strava.config['MAIL_USE_SSL'] = True
-        app_strava.config['MAIL_USERNAME'] = 'milesdash4@gmail.com'
-        app_strava.config['MAIL_PASSWORD'] = 'milesdash'
-        mail.init_app(app_strava)
-        
-
-        if request.method == 'POST' and form.validate() == True:
-                msg = Message(form.subject.data, sender = 'milesdash4@gmail.com', recipients = ['milesdash4@gmail.com'])
-                msg.body = 'From: %s <%s> %s' % (form.name.data, form.email.data,form.message.data)
-                mail.send(msg)
-                return render_template('contact.html', success=True, title='Contact')
-        elif request.method == 'GET':
-            return render_template('contact.html', form=form, title='Contact')
-        else: 
-            flash('All fields are required')
-            return render_template('contact.html', form=form, title='Contact')
-
     @app_strava.route('/goals', methods = ['GET', 'POST'])
     def form_test():
         calcs = Calcs()
